@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgres://postgres@db:5432/postgres"
+      BLAZER_DATABASE_URL: "postgres://postgres@db:5432/postgres"
+    depends_on:
+      - db
