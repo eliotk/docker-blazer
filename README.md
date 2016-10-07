@@ -39,3 +39,13 @@ That run command:
 * Exposes the container port 3000 on the host at port 3000
 
 You should now be able to query your `prod_app` target DB with the blazer app running at localhost:3000
+
+## Development
+
+It may be necessary to update the Gemfile.lock of the rails app inside the repo. You can do so by running a one-off container from the blazer image that mounts the rails_app directory into the container as the main app directory and running the `bundle install` command.
+
+This is how it looks if you're within the repo directory:
+
+`docker run -v $(pwd)/rails_app:/blazer-app  --name blazer --rm blazer bundle install`
+
+Using the `pwd` command is necessary to form an absolute path because a relative path in that volume argument will be treated as a named volume.
